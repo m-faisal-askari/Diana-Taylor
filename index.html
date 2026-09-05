@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js is-loading">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0a08" />
+  <title>Diana Taylor - Actress</title>
+  <meta name="description" content="Diana Taylor - actress of film, television and theatre. A hundred lives, one unflinching gaze." />
+
+  <!-- Progressive enhancement: swap classes before paint to avoid a flash -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.remove('no-js');
+      d.classList.add('js');
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#scene-arrival">Skip to content</a>
+
+  <!-- ===================== OPENING CURTAIN / HOUSE LIGHTS ===================== -->
+  <div class="curtain" id="curtain" aria-hidden="true">
+    <div class="curtain__mark">
+      <span class="curtain__initials">DT</span>
+      <span class="curtain__word">entering</span>
+    </div>
+  </div>
+
+  <!-- ===================== THE STAGE (persistent) =====================
+       Lighting, the monumental scene-type that sits BEHIND Diana,
+       the persistent figure, her reflection, floor + atmosphere. -->
+  <div class="stage" aria-hidden="true">
+    <div class="stage__wash"></div>
+    <div class="stage__beam"></div>
+    <div class="stage__spot" id="spot"></div>
+
+    <!-- Monumental type that lives BEHIND the figure (she stands in front of it) -->
+    <div class="backtype" id="backtype">
+      <div class="backtype__scene is-active" data-scene="0">
+        <span class="backtype__line backtype__line--a">DIANA</span>
+        <span class="backtype__line backtype__line--b">TAYLOR</span>
+      </div>
+      <div class="backtype__scene" data-scene="1"><span class="backtype__mono">WORK</span></div>
+      <div class="backtype__scene" data-scene="2"><span class="backtype__mono">RANGE</span></div>
+      <div class="backtype__scene" data-scene="3"><span class="backtype__mono">REEL</span></div>
+      <div class="backtype__scene" data-scene="4"><span class="backtype__mono">ABOUT</span></div>
+      <div class="backtype__scene" data-scene="5"><span class="backtype__mono">CURTAIN</span></div>
+    </div>
+
+    <!-- The persistent performer -->
+    <div class="figure" id="figure" data-scene="0">
+      <div class="figure__parallax" id="figureParallax">
+        <img class="figure__img" id="figureImg"
+             src="assets/images/diana-full-body.png"
+             alt="Diana Taylor, standing full length in a fitted black dress, lit by a single stage light."
+             fetchpriority="high" decoding="async" />
+        <img class="figure__reflection" src="assets/images/diana-full-body.png" alt="" aria-hidden="true" decoding="async" />
+      </div>
+    </div>
+
+    <div class="stage__floor"></div>
+    <div class="stage__vignette"></div>
+    <div class="stage__grain"></div>
+  </div>
+
+  <!-- ===================== FIXED CHROME ===================== -->
+  <header class="chrome chrome--top">
+    <a class="brand" href="#scene-arrival" data-scene-link="0" aria-label="Diana Taylor - return to opening">
+      <span class="brand__initials">DT</span>
+      <span class="brand__name">Diana Taylor</span>
+    </a>
+
+    <nav class="topnav" aria-label="Primary">
+      <a href="#scene-work" data-scene-link="1">Work</a>
+      <a href="#scene-about" data-scene-link="4">About</a>
+      <a href="#scene-contact" data-scene-link="5">Contact</a>
+    </nav>
+
+    <p class="disciplines" aria-hidden="true">Film <span>·</span> Television <span>·</span> Theatre</p>
+  </header>
+
+  <!-- Scene index - the primary "stage control" -->
+  <nav class="index" aria-label="Scene index">
+    <ol class="index__list">
+      <li><button class="index__btn is-active" data-scene-link="0" aria-current="true"><i>00</i><em>Arrival</em></button></li>
+      <li><button class="index__btn" data-scene-link="1"><i>01</i><em>Work</em></button></li>
+      <li><button class="index__btn" data-scene-link="2"><i>02</i><em>Range</em></button></li>
+      <li><button class="index__btn" data-scene-link="3"><i>03</i><em>Reel</em></button></li>
+      <li><button class="index__btn" data-scene-link="4"><i>04</i><em>About</em></button></li>
+      <li><button class="index__btn" data-scene-link="5"><i>05</i><em>Contact</em></button></li>
+    </ol>
+  </nav>
+
+  <!-- Bottom bar: where-am-I label + pager -->
+  <div class="chrome chrome--bottom">
+    <p class="nowplaying"><span class="nowplaying__idx" id="nowIdx">00</span><span class="nowplaying__sep">-</span><span class="nowplaying__name" id="nowName">Arrival</span></p>
+
+    <div class="progress" aria-hidden="true"><span class="progress__bar" id="progressBar"></span></div>
+
+    <div class="pager">
+      <button class="pager__btn" id="prevBtn" aria-label="Previous scene" disabled>
+        <svg viewBox="0 0 40 8" aria-hidden="true"><path d="M40 4H1M1 4l4-3M1 4l4 3"/></svg>
+      </button>
+      <span class="pager__count"><b id="pagerCur">00</b> / 05</span>
+      <button class="pager__btn" id="nextBtn" aria-label="Next scene">
+        <svg viewBox="0 0 40 8" aria-hidden="true"><path d="M0 4h39M39 4l-4-3M39 4l-4 3"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== SCENES ===================== -->
+  <main id="scenes">
+
+    <!-- 00 · ARRIVAL -->
+    <section class="scene scene--arrival is-active" id="scene-arrival" data-scene="0" aria-labelledby="arrival-h" tabindex="-1">
+      <h1 id="arrival-h" class="sr-only">Diana Taylor, actress</h1>
+
+      <p class="scene__eyebrow scene__eyebrow--tl" data-reveal>Actress</p>
+
+      <div class="arrival__tagline" data-reveal>
+        <p>A hundred lives.</p>
+        <p>One unflinching gaze.</p>
+      </div>
+
+      <button class="reel-cue" data-scene-link="3" data-reveal>
+        <span class="reel-cue__ring"><span class="reel-cue__tri"></span></span>
+        <span class="reel-cue__label">Showreel</span>
+        <span class="reel-cue__line"></span>
+      </button>
+
+      <a class="feature-card" href="#scene-work" data-scene-link="1" data-cursor="View" data-reveal>
+        <span class="feature-card__still" style="background-image:url('assets/images/feature-card.webp')"></span>
+        <span class="feature-card__meta">
+          <b>The Silent Room</b>
+          <i>Feature Film</i>
+          <i>2025</i>
+        </span>
+      </a>
+    </section>
+
+    <!-- 01 · WORK / FILMOGRAPHY -->
+    <section class="scene scene--work" id="scene-work" data-scene="1" aria-labelledby="work-h" tabindex="-1" aria-hidden="true">
+      <header class="scene__head" data-reveal>
+        <p class="scene__eyebrow">01 - Selected Work</p>
+        <h2 id="work-h" class="scene__title">Filmography</h2>
+      </header>
+
+      <div class="work">
+        <ol class="filmo" id="filmo">
+          <li class="filmo__row" data-reveal>
+            <button class="filmo__link" data-cursor="View" data-still="assets/images/the-silent-room.webp" data-focus="upper">
+              <span class="filmo__no">01</span>
+              <span class="filmo__title">The Silent Room</span>
+              <span class="filmo__meta"><i>Feature Film</i><i>2025</i></span>
+              <span class="filmo__role">Marlow · Lead</span>
+              <span class="filmo__dir">dir. Julian Vance</span>
+            </button>
+          </li>
+          <li class="filmo__row" data-reveal>
+            <button class="filmo__link" data-cursor="View" data-still="assets/images/in-the-absence-of-light.webp" data-focus="mid">
+              <span class="filmo__no">02</span>
+              <span class="filmo__title">In the Absence of Light</span>
+              <span class="filmo__meta"><i>Feature Film</i><i>2024</i></span>
+              <span class="filmo__role">Eve · Lead</span>
+              <span class="filmo__dir">dir. Marcus Sterling</span>
+            </button>
+          </li>
+          <li class="filmo__row" data-reveal>
+            <button class="filmo__link" data-cursor="View" data-still="assets/images/parallel.webp" data-focus="lower">
+              <span class="filmo__no">03</span>
+              <span class="filmo__title">Parallel</span>
+              <span class="filmo__meta"><i>Limited Series</i><i>2023</i></span>
+              <span class="filmo__role">Dr. Aster · Series Regular</span>
+              <span class="filmo__dir">for Aster Media</span>
+            </button>
+          </li>
+          <li class="filmo__row" data-reveal>
+            <button class="filmo__link" data-cursor="View" data-still="assets/images/salt-and-ember.webp" data-focus="upper">
+              <span class="filmo__no">04</span>
+              <span class="filmo__title">Salt &amp; Ember</span>
+              <span class="filmo__meta"><i>Short Film</i><i>2022</i></span>
+              <span class="filmo__role">Elena · Lead</span>
+              <span class="filmo__dir">dir. Liam Henderson</span>
+            </button>
+          </li>
+          <li class="filmo__row" data-reveal>
+            <button class="filmo__link" data-cursor="View" data-still="assets/images/the-long-winter.webp" data-focus="mid">
+              <span class="filmo__no">05</span>
+              <span class="filmo__title">The Long Winter</span>
+              <span class="filmo__meta"><i>Theatre</i><i>2022</i></span>
+              <span class="filmo__role">Nina · Lead</span>
+              <span class="filmo__dir">Elena Mercer</span>
+            </button>
+          </li>
+        </ol>
+
+        <figure class="still" id="still" aria-hidden="true">
+          <div class="still__frame">
+            <img class="still__img" id="stillImg" src="assets/images/the-silent-room.webp" alt="" decoding="async" loading="lazy" />
+            <span class="still__placeholder" id="stillPlaceholder">Still forthcoming</span>
+          </div>
+          <figcaption class="still__cap" id="stillCap">The Silent Room - 2025</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 02 · RANGE / ROLES -->
+    <section class="scene scene--range" id="scene-range" data-scene="2" aria-labelledby="range-h" tabindex="-1" aria-hidden="true">
+      <header class="scene__head scene__head--right" data-reveal>
+        <p class="scene__eyebrow">02 - What kind of performer</p>
+        <h2 id="range-h" class="scene__title"></h2>
+      </header>
+
+      <ul class="roles" id="roles">
+        <li class="roles__item" data-reveal>
+          <button class="roles__btn" data-focus="upper" data-line="Wide-eyed, luminous, dangerous to underestimate.">
+            <span class="roles__word">The Ingénue</span>
+          </button>
+        </li>
+        <li class="roles__item" data-reveal>
+          <button class="roles__btn" data-focus="mid" data-line="Composure that splinters one frame at a time.">
+            <span class="roles__word">The Fracture</span>
+          </button>
+        </li>
+        <li class="roles__item" data-reveal>
+          <button class="roles__btn" data-focus="lower" data-line="Stillness that hunts. Charm as a blade.">
+            <span class="roles__word">The Predator</span>
+          </button>
+        </li>
+        <li class="roles__item" data-reveal>
+          <button class="roles__btn" data-focus="upper" data-line="Grief worn quietly, carried with grace.">
+            <span class="roles__word">The Penitent</span>
+          </button>
+        </li>
+        <li class="roles__item" data-reveal>
+          <button class="roles__btn" data-focus="full" data-line="Present and absent at once - a held breath.">
+            <span class="roles__word">The Ghost</span>
+          </button>
+        </li>
+      </ul>
+
+      <p class="roles__readout" id="rolesReadout" data-reveal>Hover a role to change the light.</p>
+    </section>
+
+    <!-- 03 · REEL -->
+    <section class="scene scene--reel" id="scene-reel" data-scene="3" aria-labelledby="reel-h" tabindex="-1" aria-hidden="true">
+      <header class="scene__head scene__head--center" data-reveal>
+        <p class="scene__eyebrow">03 - In motion</p>
+        <h2 id="reel-h" class="scene__title">The Reel</h2>
+      </header>
+
+      <!-- Replace the poster image and wire the play control to your hosted reel. -->
+      <div class="reel" data-reveal>
+        <button class="reel__stage" id="reelBtn" data-cursor="Play" aria-label="Play showreel (placeholder - reel to be added)">
+          <img class="reel__poster" src="assets/images/reel-thumbnail.webp" alt="Diana Taylor, showreel poster frame." decoding="async" loading="lazy" />
+          <span class="reel__scrim"></span>
+          <span class="reel__play">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31"/><path d="M26 21l18 11-18 11z"/></svg>
+          </span>
+          <span class="reel__runtime">Showreel - 02:14</span>
+        </button>
+        <p class="reel__note">Full reel available on request </p>
+      </div>
+    </section>
+
+    <!-- 04 · ABOUT -->
+    <section class="scene scene--about" id="scene-about" data-scene="4" aria-labelledby="about-h" tabindex="-1" aria-hidden="true">
+      <div class="about">
+        <header class="scene__head" data-reveal>
+          <p class="scene__eyebrow">04 - The person behind</p>
+          <h2 id="about-h" class="scene__title">About Diana</h2>
+        </header>
+
+        <div class="about__body" data-reveal>
+          <p class="about__lede">Diana Taylor works in the space between what is said and what is withheld.</p>
+          <p>Trained for the stage and drawn to the camera, she builds characters from the inside out - favouring restraint, contradiction, and the small gestures that betray a whole interior life. Directors return to her for the same reason audiences do: she makes silence legible.</p>
+          <p>She lives between projects and cities, and reads more than she sleeps.</p>
+        </div>
+
+        <figure class="about__portrait" data-reveal>
+          <img src="assets/images/about-portrait.webp" alt="Diana Taylor, portrait." decoding="async" loading="lazy" />
+        </figure>
+
+        <aside class="recognition" data-reveal aria-label="Selected recognition">
+          <h3 class="recognition__h">Selected Recognition</h3>
+          <ul>
+            <li><span>Los Angeles Talent Con</span><i>2024</i></li>
+            <li><span>Emmy</span><i>2023</i></li>
+            <li><span>Ensemble Network</span><i>2023</i></li>
+          </ul>
+          <!-- <p class="recognition__note">Placeholder entries - replace with verified credits.</p> -->
+        </aside>
+      </div>
+    </section>
+
+    <!-- 05 · CONTACT / CURTAIN -->
+    <section class="scene scene--contact" id="scene-contact" data-scene="5" aria-labelledby="contact-h" tabindex="-1" aria-hidden="true">
+      <footer class="contact">
+        <header class="scene__head scene__head--center" data-reveal>
+          <p class="scene__eyebrow">05 - End of performance</p>
+          <h2 id="contact-h" class="scene__title">Diana Taylor</h2>
+          <p class="contact__role">Actress · Film / Television / Theatre</p>
+        </header>
+
+        <div class="contact__grid" data-reveal>
+          <div class="contact__col">
+            <span class="contact__label">Representation</span>
+            <a href="#">Wilson Enterprises</a>
+            <a href="mailto:representation@dianataylor.com">representation@dianataylor.com</a>
+          </div>
+          <div class="contact__col">
+            <span class="contact__label">Enquiries</span>
+            <a href="mailto:hello@dianataylor.example">hello@dianataylor.com</a>
+          </div>
+          <div class="contact__col">
+            <span class="contact__label">Elsewhere</span>
+            <a href="#">Instagram</a>
+            <a href="#">IMDb</a>
+            <a href="#">Vimeo</a>
+          </div>
+        </div>
+
+        <p class="contact__fin" data-reveal>Fin.</p>
+      </footer>
+    </section>
+  </main>
+
+  <!-- Meaningful custom cursor (hidden on touch / reduced-motion) -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <span class="cursor__dot"></span>
+    <span class="cursor__ring"></span>
+    <span class="cursor__label" id="cursorLabel"></span>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
